@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Books{% endblock %}
+{% block subheader_page_title %}{{category.name}}{% endblock %}
+
+
+{% block actions %}
+<a href="{% url 'create_question' %}" class="btn btn-clean btn-hover-light-primary- active btn-sm font-weight-bold font-size-base mr-1">Add Question</a>
+{% endblock %}
+
+
 {% block content %}
 
-<div class="bg-dark text-white p-3 d-flex align-items-center justify-content-between mb-5">
-    <h1>{{category.name}}</h1>
-    <a class="btn btn-outline-secondary text-white" href="{% url 'create_question' %}">Add Question</a>
-</div>
 {% for question in questions %}
 <div class="card mb-4">
     <div class="card-header text-capitalize bg-dark-subtle text-emphasis-dark d-flex align-items-center justify-content-between ">
@@ -14,9 +19,7 @@
     </div>
     <div class="card-body">
         {{question.answer|safe}}
-
     </div>
-
 </div>
 
 {% endfor %}

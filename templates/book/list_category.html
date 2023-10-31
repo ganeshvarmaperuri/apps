@@ -1,27 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Books{% endblock %}
+{% block subheader_page_title %}Books{% endblock %}
+
+{% block actions %}
+<a href="{% url 'create_category' %}" class="btn btn-clean btn-hover-light-primary- active btn-sm font-weight-bold font-size-base mr-1">Add Category</a>
+{% endblock %}
+
+
 {% block content %}
-<div class="row">
-  {% for category in categories %}
-  <div class="col-md-3 col-sm-1 mb-5">
-    <div class="card" style="width: 18rem;">
-      <a href="{% url 'details_category' category.id %}">
-      <img src="{{category.image.url}}" height="200px" width="200px" class="card-img-top" alt="{{category}}"></a>
-      <div class="card-body bg-dark-subtle text-emphasis-dark d-flex align-items-center justify-content-between">
-        <strong class="text-capitalize fw-semibold">{{category}}</strong>
-        <a class="btn btn-secondary btn-sm" href="{% url 'update_category' category.id %}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-          </svg>
-        </a>
 
+    <div class="row">
+      {% for category in categories %}
+      <div class="col-md-3 col-sm-1 mb-5">
+        <div class="card card-custom gutter-b" style="width: 18rem;">
+          <div class="card-header">
+            <a href="{% url 'details_category' category.id %}">
+            <img src="{{category.image.url}}" height="200px" width="200px" class="card-img-top" alt="{{category}}"></a>
+          </div>
+          <div class="card-body bg-dark-subtle text-emphasis-dark d-flex align-items-center justify-content-between">
+            <strong class="text-capitalize fw-semibold">{{category}}</strong>
+            <a class="btn btn-secondary btn-sm" href="{% url 'update_category' category.id %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
+    {% endfor %}
     </div>
-  </div>
-{% endfor %}
-</div>
 
-{% include 'footer.html' %}
+
 {% endblock %}

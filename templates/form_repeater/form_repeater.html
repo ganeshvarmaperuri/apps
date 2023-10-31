@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Inspection Form{% endblock %}
+{% block subheader_page_title %}Inspection Form{% endblock %}
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <div class="card mb-5">
+        <div class="card-body">
+            <div class="form-row align-items-center">
+                <div class="form-group col-md-10">
+                     {{ inspection_form.name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-2 mb-0">
+                     {{ inspection_form.is_verified|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ formset.management_form }}
+    {{ formset.non_form_errors }}
+    <div class="category_container">
+        {% for category_form in formset.forms %}
+        <div class="card mb-5 category_item">
+            <div class="card-body">
+                <div class="form-row align-items-center">
+                    <div class="form-group col-md-10">{{category_form.category|as_crispy_field}}</div>
+                    <div class="form-group col-md-2 mb-0">{{category_form.DELETE|as_crispy_field}}</div>
+                </div>
+                {% if category_form.nested %}
+                    <div class="question_container">
+                    {{category_form.nested.management_form}}
+                    {{category_form.nested.non_form_errors }}
+                    {% for question_form in category_form.nested.forms %}
+                        <div></div>
+                        <div class="question_item form-row align-items-center">
+                            <div class="form-group col-md-6">
+                                {{question_form.question|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                {{question_form.is_saved|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-2 mb-0">
+                                {{question_form.DELETE|as_crispy_field}}
+                            </div>
+                        </div>
+                        {% if question_form.nested %}
+                            <div class="answer_container">
+                                {{question_form.nested.management_form}}
+                                {{question_form.nested.non_form_errors }}
+                                {% for answer_form in  question_form.nested.forms %}
+                                    <div class="form-row answer_item">
+                                        <div class="form-group col-md-6">
+                                            {{answer_form.answer|as_crispy_field}}
+                                            {{answer_form.answer_priority|as_crispy_field}}
+                                            {{answer_form.DELETE|as_crispy_field}}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            {{answer_form.comment|as_crispy_field}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
