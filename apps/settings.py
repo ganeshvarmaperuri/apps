@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "ckeditor",
     "django_seed",
+    'django_celery_results',
 
     "book",
     "northwind",
     "hospital_1",
     'form_repeater'
+    'expenses_analytics',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -140,3 +142,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
+CELERY_RESULT_BACKEND = 'django-db'  # Using Django database as the result backend
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
