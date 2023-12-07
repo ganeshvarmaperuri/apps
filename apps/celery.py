@@ -4,8 +4,8 @@ from celery import Celery
 
 from apps import settings
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apps.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "apps.settings")
 
-app = Celery('apps')
-app.config_from_object('django.conf:settings', namespace='CELERY')
+app = Celery("apps")
+app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
