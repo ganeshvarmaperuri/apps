@@ -46,14 +46,14 @@ class CategoryDetail(DetailView):
 class QuestionCreate(CreateView):
     model = Question
     form_class = QuestionForm
-    template_name = "book/create_question.html"
+    template_name = "book/create_update_question.html"
     success_url = reverse_lazy("create_question")
 
 
 class QuestionUpdate(UpdateView):
     model = Question
     form_class = QuestionForm
-    template_name = "book/update_question.html"
+    template_name = "book/create_update_question.html"
     success_url = reverse_lazy("list_category")
 
     def get_success_url(self):
