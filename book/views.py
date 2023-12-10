@@ -90,7 +90,6 @@ def quiz(request, pk):
     question = questions.order_by("?").first()
     context["question"] = question
     context["pk"] = pk
-    print(context)
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
         return JsonResponse({"question": question.question, "answer": question.answer})
     else:
