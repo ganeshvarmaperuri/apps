@@ -16,4 +16,3 @@ class QuestionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(QuestionForm, self).__init__(*args, **kwargs)
         self.fields["category"].widget.attrs = {"class": "form-control"}
-

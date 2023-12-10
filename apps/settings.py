@@ -96,18 +96,18 @@ WSGI_APPLICATION = "apps.wsgi.application"
 # }
 
 DATABASES = {
-    'db2': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gvtech',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',  # Or your PostgreSQL host IP
-        'PORT': '5432',           # Default PostgreSQL port is 5432
+    "db2": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "gvtech",
+        "USER": "postgres",
+        "PASSWORD": "root",
+        "HOST": "localhost",  # Or your PostgreSQL host IP
+        "PORT": "5432",  # Default PostgreSQL port is 5432
     },
-    'default': {
+    "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
 }
 
 # Password validation

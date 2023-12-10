@@ -7,7 +7,7 @@ from django.views.generic import (
     DetailView,
     UpdateView,
     DeleteView,
-TemplateView
+    TemplateView,
 )
 from .models import Category, Question
 from .forms import *
@@ -87,11 +87,11 @@ class QuestionUpdate(UpdateView):
 def quiz(request, pk):
     context = {}
     questions = Question.objects.filter(category__id=pk)
-    question = questions.order_by('?').first()
+    question = questions.order_by("?").first()
     context["question"] = question
     context["pk"] = pk
     print(context)
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return JsonResponse({'question':question.question, 'answer':question.answer})
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"question": question.question, "answer": question.answer})
     else:
-        return render(request, 'book/quiz.html', context)
+        return render(request, "book/quiz.html", context)
