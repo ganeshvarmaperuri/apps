@@ -3,7 +3,13 @@
 {% load crispy_forms_tags %}
 
 {% block title %}Books{% endblock %}
-{% block subheader_page_title %}Question{% endblock %}
+{% block page_title %}{% endblock %}
+{% block subheader_page_title %}{% if form.question.value %}{{form.question.value|safe}}{% else %}{% endif %}{% endblock %}
+
+{% block actions %}
+<a href="javascript:history.go(-1)" class="btn btn-light-dark text-dark font-weight-bold">
+    <i class="text-dark flaticon2-left-arrow"></i>back</a>
+{% endblock %}
 
 {% block content %}
 

@@ -11,4 +11,5 @@ urlpatterns = [
     path("question/create/", QuestionCreate.as_view(), name="create_question"),
     path("question/update/<slug:pk>", QuestionUpdate.as_view(), name="update_question"),
     # path('question/update/<slug:pk>', CategoryUpdate.as_view(), name='update_question'),
+    path('quiz/<slug:pk>', quiz, name='quiz'),
 ]

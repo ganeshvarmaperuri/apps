@@ -3,7 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}Books{% endblock %}
-{% block subheader_page_title %}Create Category{% endblock %}
+{% block page_title %}Category{% endblock %}
+{% block actions %}
+<a href="javascript:history.go(-1)" class="btn btn-light-dark text-dark font-weight-bold">
+    <i class="text-dark flaticon2-left-arrow"></i>back</a>
+{% endblock %}
 
 {% block content %}
 <div class="card">

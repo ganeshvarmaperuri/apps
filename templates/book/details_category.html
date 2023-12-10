@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block title %}Books{% endblock %}
-{% block subheader_page_title %}{{category.name}}{% endblock %}
+{% block page_title %}{{category.name}}{% endblock %}
+{% block subheader_page_title %}{% endblock %}
 
 
 {% block actions %}
-<a href="{% url 'create_question' %}" class="btn btn-clean btn-hover-light-primary- active btn-sm font-weight-bold font-size-base mr-1">Add Question</a>
+<a href="{% url 'create_question' %}" class="btn btn-dark font-weight-bold mr-2">Add Question</a>
 {% endblock %}
 
 
@@ -14,7 +15,7 @@
 
 {% for question in questions %}
 <div class="card mb-4">
-    <div class="card-header text-capitalize bg-dark-subtle text-emphasis-dark d-flex align-items-center justify-content-between ">
+    <div class="question card-header font-weight-bolder text-capitalize bg-dark-subtle text-emphasis-dark d-flex align-items-center justify-content-between ">
         {{question.question|safe}} <a class="btn btn-dark" href="{% url 'update_question' question.id %}">edit</a>
     </div>
     <div class="card-body">

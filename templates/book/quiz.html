@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Books{% endblock %}
+{% block page_title %}Quiz{% endblock %}
+{% block subheader_page_title %}{% endblock %}
+
+{% block actions %}
+<a href="javascript:history.go(-1)" class="btn btn-light-dark text-dark font-weight-bold">
+    <i class="text-dark flaticon2-left-arrow"></i>back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample3">
+            <div class="card">
+                <div class="card-header bg-gray-600 font-weight-bolder text-capitalize text-dark d-flex align-items-center justify-content-between p-5" id="headingOne3">
+                    <div id="div_question" class="question justify-content-right"> {{question.question|safe}}</div>
+                    <div class="">
+                        <button class="btn btn-dark" id="question_refresh">Refresh</button>
+                        <button class="btn btn-dark" id="" data-toggle="collapse" data-target="#collapseOne3"><i class="icon-1x text-white flaticon2-arrow-down"></i></button>
+                    </div>
+                </div>
+                <div id="collapseOne3" class="collapse" data-parent="#accordionExample3">
+                    <div id="div_answer" class="card-body bg-gray-300 text-dark-50">
+                       {{question.answer|safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    console.log('hi')
+    console.log('{% url 'quiz' pk %}')
+    $('#question_refresh').click(function(){
+        $.ajax({
+            url: '{% url 'quiz' pk %}', // Replace with your endpoint URL
+            type: 'GET', // or 'POST', depending on your view
+            success: function(response) {
+                // Handle the response data from the server
+                console.log(response.question);
+                console.log(response.answer);
+                // Perform actions based on the response
+                $('#div_question').html(response.question)
+                $('#div_answer').html(response.answer)
+            },
+            error: function(xhr, errmsg, err) {
+                // Handle error cases
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+    });
+
+});
+
+</script>
+
+{% endblock%}

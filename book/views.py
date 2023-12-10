@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -6,6 +7,7 @@ from django.views.generic import (
     DetailView,
     UpdateView,
     DeleteView,
+TemplateView
 )
 from .models import Category, Question
 from .forms import *
@@ -14,7 +16,7 @@ from .forms import *
 class CategoryCreate(CreateView):
     model = Category
     form_class = CategoryForm
-    template_name = "book/create_category.html"
+    template_name = "book/create_update_category.html"
     success_url = reverse_lazy("list_category")
 
 
@@ -27,7 +29,7 @@ class CategoryList(ListView):
 class CategoryUpdate(UpdateView):
     model = Category
     form_class = CategoryForm
-    template_name = "book/update_category.html"
+    template_name = "book/create_update_category.html"
     success_url = reverse_lazy("list_category")
 
 
@@ -71,3 +73,25 @@ class QuestionUpdate(UpdateView):
 #             category_id=self.kwargs['pk']
 #         )
 #
+
+# class Quiz(TemplateView):
+#     template_name = 'book/quiz.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         obj_id = self.request.GET.get('pk')
+#         context['id'] = obj_id
+#         return context
+
+
+def quiz(request, pk):
+    context = {}
+    questions = Question.objects.filter(category__id=pk)
+    question = questions.order_by('?').first()
+    context["question"] = question
+    context["pk"] = pk
+    print(context)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'question':question.question, 'answer':question.answer})
+    else:
+        return render(request, 'book/quiz.html', context)
